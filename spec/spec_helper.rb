@@ -2,7 +2,6 @@ require 'shoulda/matchers'
 require 'simplecov'
 SimpleCov.start 'rails'
 require 'factory_bot_rails'
-FactoryBot.find_definitions
 
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
