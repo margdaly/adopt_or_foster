@@ -65,3 +65,6 @@ group :development do
   gem "rubocop-rails"
 end
 
+group :production do
+  gem "pg"
+end
