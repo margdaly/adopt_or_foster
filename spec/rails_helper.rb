@@ -12,8 +12,6 @@ require 'rspec/rails'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
-
-
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
 begin
@@ -30,19 +28,6 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
-  # You can uncomment this line to turn off ActiveRecord support entirely.
-  # config.use_active_record = false
-
-  # RSpec Rails can automatically mix in different behaviours to your tests
-  # based on their file location, for example enabling you to call `get` and
-  # `post` in specs under `spec/controllers`.
-  #
-  # You can disable this behaviour by removing the line below, and instead
-  # explicitly tag your specs with their type, e.g.:
-  #
-  #     RSpec.describe UsersController, type: :controller do
-  #       # ...
-  #     end
   #
   # The different available types are documented in the features, such as in
   # https://rspec.info/features/6-0/rspec-rails
@@ -52,6 +37,17 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.include Capybara::DSL
+end
+
+VCR.configure do |config|
+  config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
+  config.hook_into :webmock
+  config.filter_sensitive_data('x-api-key') { ENV['x-api-key'] }
+  config.configure_rspec_metadata!
+  config.allow_http_connections_when_no_cassette = true
+  config.default_cassette_options = { record: :new_episodes, re_record_interval: 7.days }
 end
 
 Shoulda::Matchers.configure do |config|

@@ -1,7 +1,9 @@
 require 'shoulda/matchers'
 require 'simplecov'
-SimpleCov.start 'rails'
+require 'webmock/rspec'
 require 'factory_bot_rails'
+SimpleCov.start 'rails'
+WebMock.disable_net_connect!(allow_localhost: true)
 
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
