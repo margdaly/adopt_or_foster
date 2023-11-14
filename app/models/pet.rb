@@ -3,4 +3,6 @@ class Pet < ApplicationRecord
   validates :breed, presence: true
   validates_length_of :breed, is: 4
   validates :name, presence: true
+
+  belongs_to :shelter
 end
