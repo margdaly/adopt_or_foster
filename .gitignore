@@ -36,3 +36,9 @@
 
 # Ignore coverage files.
 /coverage/
+
+# Ignore application configuration
+/config/application.yml
+
+# Ignore .gitignore itself because it's redundant.
+/.gitignore
