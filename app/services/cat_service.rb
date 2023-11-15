@@ -6,6 +6,10 @@ class CatService
     get_url('breeds')
   end
 
+  def random_cat_image
+    get_url('images/search')
+  end
+
   private
 
   def conn
