@@ -64,7 +64,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'simplecov'
-  # gem 'vcr'
+  gem 'vcr'
   gem 'webmock'
 end
 
