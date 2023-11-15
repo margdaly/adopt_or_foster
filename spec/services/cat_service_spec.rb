@@ -3,15 +3,13 @@ require 'rails_helper'
 describe 'Cat Service' do
   describe '#all_cat_breeds' do
     VCR.use_cassette('cat_api_breeds_request') do
-      before :each do
-        @cat_breeds = CatService.new.all_cat_breeds
-      end
+      let(:cat_breeds) { CatService.new.all_cat_breeds }
 
       it 'returns cat breed name and id' do
-        expect(@cat_breeds).to be_a(Array)
-        expect(@cat_breeds.count).to eq(67)
+        expect(cat_breeds).to be_a(Array)
+        expect(cat_breeds.count).to eq(67)
 
-        @cat_breeds.each do |breed|
+        cat_breeds.each do |breed|
           expect(breed).to be_a(Hash)
           # id is a 4 letter code used to identify the breed,
           expect(breed).to have_key(:id)
@@ -24,7 +22,7 @@ describe 'Cat Service' do
       end
 
       it 'returns description of cat breed' do
-        @cat_breeds.each do |breed|
+        cat_breeds.each do |breed|
           expect(breed).to have_key(:temperament)
           expect(breed[:temperament]).to be_a(String)
           expect(breed).to have_key(:origin)
@@ -38,7 +36,7 @@ describe 'Cat Service' do
 
       it 'returns level of care for cat breed' do
         # Owner Info in Levels 1-5
-        @cat_breeds.each do |breed|
+        cat_breeds.each do |breed|
           expect(breed).to have_key(:affection_level)
           expect(breed[:affection_level]).to be_a(Integer)
           expect(breed).to have_key(:child_friendly)
@@ -62,6 +60,26 @@ describe 'Cat Service' do
           expect(breed).to have_key(:vocalisation)
           expect(breed[:vocalisation]).to be_a(Integer)
         end
+      end
+    end
+  end
+
+  describe '#random_cat_image' do
+    VCR.use_cassette('random_cat_image_request') do
+      it 'returns a random picture of a cat' do
+        cat_pic = CatService.new.random_cat_image
+
+        expect(cat_pic).to be_a(Array)
+        expect(cat_pic.count).to eq(1)
+        expect(cat_pic.first).to be_a(Hash)
+        expect(cat_pic.first).to have_key(:id)
+        expect(cat_pic.first[:id]).to be_a(String)
+        expect(cat_pic.first).to have_key(:url)
+        expect(cat_pic.first[:url]).to be_a(String)
+        expect(cat_pic.first).to have_key(:width)
+        expect(cat_pic.first[:width]).to be_a(Integer)
+        expect(cat_pic.first).to have_key(:height)
+        expect(cat_pic.first[:height]).to be_a(Integer)
       end
     end
   end
