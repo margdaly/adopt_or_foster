@@ -136,4 +136,32 @@ describe 'Cat Service' do
       end
     end
   end
+
+  describe '#multi_cat_breed_images' do
+    it 'returns a collection of cat pictures based on the selected quantity and breed' do
+      breed_id = 'beng'
+      img_amount = 10
+
+      stub_request(:get, "https://api.thecatapi.com/v1/images/search?breed_ids=#{breed_id}&limit=#{img_amount}") \
+        .to_return(body: File.read('spec/fixtures/the_cat_api/multi_cat_breed_images.json'))
+
+      bengal_imgs = CatService.new.multi_cat_breed_images('beng', 10)
+
+      expect(bengal_imgs).to be_a(Array)
+      expect(bengal_imgs.count).to eq(10)
+
+      bengal_imgs.each do |img_info|
+        expect(img_info).to be_a(Hash)
+        expect(img_info).to have_key(:id)
+        expect(img_info[:id]).to be_a(String)
+        expect(img_info[:id].size).to eq(9)
+        expect(img_info).to have_key(:url)
+        expect(img_info[:url]).to be_a(String)
+        expect(img_info).to have_key(:width)
+        expect(img_info[:width]).to be_a(Integer)
+        expect(img_info).to have_key(:height)
+        expect(img_info[:height]).to be_a(Integer)
+      end
+    end
+  end
 end
