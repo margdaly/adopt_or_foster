@@ -110,4 +110,29 @@ describe 'Cat Service' do
       end
     end
   end
+
+  describe '#cat_breed_image' do
+    it 'returns a picture of a cat by breed' do
+      VCR.use_cassette('cat_api_breed_image_request') do
+        # breed_id = 'beng'
+        # stub_request(:get, "https://api.thecatapi.com/v1/images/search?breed_ids=#{breed_id}") \
+        #   .to_return(body: File.read('spec/fixtures/the_cat_api/cat_breed_image.json'))
+
+        cat_pic = CatService.new.cat_breed_image('beng')
+
+        expect(cat_pic).to be_a(Array)
+        expect(cat_pic.count).to eq(1)
+        expect(cat_pic.first).to be_a(Hash)
+        expect(cat_pic.first).to have_key(:id)
+        expect(cat_pic.first[:id]).to be_a(String)
+        expect(cat_pic.first[:id].size).to eq(9)
+        expect(cat_pic.first).to have_key(:url)
+        expect(cat_pic.first[:url]).to be_a(String)
+        expect(cat_pic.first).to have_key(:width)
+        expect(cat_pic.first[:width]).to be_a(Integer)
+        expect(cat_pic.first).to have_key(:height)
+        expect(cat_pic.first[:height]).to be_a(Integer)
+      end
+    end
+  end
 end
