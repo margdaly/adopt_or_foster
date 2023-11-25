@@ -84,4 +84,30 @@ describe 'Cat Service' do
       expect(cat_pic.first[:height]).to be_a(Integer)
     end
   end
+
+  describe '#multi_random_cat_images' do
+    it 'returns a collection of cat pictures based on the selected quantity' do
+      img_amount = 10
+      stub_request(:get, "https://api.thecatapi.com/v1/images/search?limit=#{img_amount}") \
+        .to_return(body: File.read('spec/fixtures/the_cat_api/multi_random_cat_images.json'))
+
+      cat_pics = CatService.new.multi_random_cat_images(10)
+
+      expect(cat_pics).to be_a(Array)
+      expect(cat_pics.count).to eq(10)
+
+      cat_pics.each do |img_info|
+        expect(img_info).to be_a(Hash)
+        expect(img_info).to have_key(:id)
+        expect(img_info[:id]).to be_a(String)
+        expect(img_info[:id].size).to eq(9)
+        expect(img_info).to have_key(:url)
+        expect(img_info[:url]).to be_a(String)
+        expect(img_info).to have_key(:width)
+        expect(img_info[:width]).to be_a(Integer)
+        expect(img_info).to have_key(:height)
+        expect(img_info[:height]).to be_a(Integer)
+      end
+    end
+  end
 end
