@@ -4,8 +4,8 @@ require 'rails_helper'
 
 describe 'Cat Object' do
   it 'exists and has attributes' do
-    data = {  breed_id: 'abys',
-              breed_name: 'Abyssinian',
+    data = {  id: 'abys',
+              name: 'Abyssinian',
               temperament: 'Active, Energetic, Independent, Intelligent, Gentle',
               origin: 'Egypt',
               description: 'The Abyssinian is easy to care for, and a joy to have in your home. They’re affectionate cats and love both people and other animals.',
