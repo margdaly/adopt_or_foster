@@ -69,19 +69,19 @@ describe 'Cat Service' do
       stub_request(:get, 'https://api.thecatapi.com/v1/images/search') \
         .to_return(body: File.read('spec/fixtures/the_cat_api/random_cat_image.json'))
 
-      cat_pic = CatService.new.random_cat_image
+      rando_cat_img = CatService.new.random_cat_image
 
-      expect(cat_pic).to be_a(Array)
-      expect(cat_pic.count).to eq(1)
-      expect(cat_pic.first).to be_a(Hash)
-      expect(cat_pic.first).to have_key(:id)
-      expect(cat_pic.first[:id]).to be_a(String)
-      expect(cat_pic.first).to have_key(:url)
-      expect(cat_pic.first[:url]).to be_a(String)
-      expect(cat_pic.first).to have_key(:width)
-      expect(cat_pic.first[:width]).to be_a(Integer)
-      expect(cat_pic.first).to have_key(:height)
-      expect(cat_pic.first[:height]).to be_a(Integer)
+      expect(rando_cat_img).to be_a(Array)
+      expect(rando_cat_img.count).to eq(1)
+      expect(rando_cat_img.first).to be_a(Hash)
+      expect(rando_cat_img.first).to have_key(:id)
+      expect(rando_cat_img.first[:id]).to be_a(String)
+      expect(rando_cat_img.first).to have_key(:url)
+      expect(rando_cat_img.first[:url]).to be_a(String)
+      expect(rando_cat_img.first).to have_key(:width)
+      expect(rando_cat_img.first[:width]).to be_a(Integer)
+      expect(rando_cat_img.first).to have_key(:height)
+      expect(rando_cat_img.first[:height]).to be_a(Integer)
     end
   end
 
@@ -115,23 +115,24 @@ describe 'Cat Service' do
     it 'returns a picture of a cat by breed' do
       VCR.use_cassette('cat_api_breed_image_request') do
         # breed_id = 'beng'
+
         # stub_request(:get, "https://api.thecatapi.com/v1/images/search?breed_ids=#{breed_id}") \
         #   .to_return(body: File.read('spec/fixtures/the_cat_api/cat_breed_image.json'))
 
-        cat_pic = CatService.new.cat_breed_image('beng')
+        beng_cat_img = CatService.new.cat_breed_image('beng')
 
-        expect(cat_pic).to be_a(Array)
-        expect(cat_pic.count).to eq(1)
-        expect(cat_pic.first).to be_a(Hash)
-        expect(cat_pic.first).to have_key(:id)
-        expect(cat_pic.first[:id]).to be_a(String)
-        expect(cat_pic.first[:id].size).to eq(9)
-        expect(cat_pic.first).to have_key(:url)
-        expect(cat_pic.first[:url]).to be_a(String)
-        expect(cat_pic.first).to have_key(:width)
-        expect(cat_pic.first[:width]).to be_a(Integer)
-        expect(cat_pic.first).to have_key(:height)
-        expect(cat_pic.first[:height]).to be_a(Integer)
+        expect(beng_cat_img).to be_a(Array)
+        expect(beng_cat_img.count).to eq(1)
+        expect(beng_cat_img.first).to be_a(Hash)
+        expect(beng_cat_img.first).to have_key(:id)
+        expect(beng_cat_img.first[:id]).to be_a(String)
+        expect(beng_cat_img.first[:id].size).to eq(9)
+        expect(beng_cat_img.first).to have_key(:url)
+        expect(beng_cat_img.first[:url]).to be_a(String)
+        expect(beng_cat_img.first).to have_key(:width)
+        expect(beng_cat_img.first[:width]).to be_a(Integer)
+        expect(beng_cat_img.first).to have_key(:height)
+        expect(beng_cat_img.first[:height]).to be_a(Integer)
       end
     end
   end
