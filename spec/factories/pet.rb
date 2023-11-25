@@ -4,7 +4,10 @@ FactoryBot.define do
   factory :pet do
     shelter
     adoptable { true }
-    breed { Faker::Creature::Cat.breed[0, 4] }
-    name { Faker::Creature::Cat.name }
+
+    trait :cat do
+      breed { Faker::Creature::Cat.breed[0, 4] }
+      name { Faker::Creature::Cat.name }
+    end
   end
 end
