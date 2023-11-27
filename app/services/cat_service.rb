@@ -18,6 +18,10 @@ class CatService
     get_url("images/search?breed_ids=#{breed_id}")
   end
 
+  def multi_cat_breed_images(breed_id, amount)
+    get_url("images/search?breed_ids=#{breed_id}&limit=#{amount}")
+  end
+
   private
 
   def conn
