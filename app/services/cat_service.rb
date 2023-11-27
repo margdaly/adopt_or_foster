@@ -10,6 +10,10 @@ class CatService
     get_url('images/search')
   end
 
+  def multi_random_cat_images(amount)
+    get_url("images/search?limit=#{amount}")
+  end
+
   private
 
   def conn
