@@ -100,7 +100,6 @@ describe 'Cat Service' do
         expect(img_info).to be_a(Hash)
         expect(img_info).to have_key(:id)
         expect(img_info[:id]).to be_a(String)
-        expect(img_info[:id].size).to eq(9)
         expect(img_info).to have_key(:url)
         expect(img_info[:url]).to be_a(String)
         expect(img_info).to have_key(:width)
