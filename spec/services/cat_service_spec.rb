@@ -112,27 +112,27 @@ describe 'Cat Service' do
 
   describe '#cat_breed_image' do
     it 'returns a picture of a cat by breed' do
-      VCR.use_cassette('cat_api_breed_image_request') do
-        # breed_id = 'beng'
+      # VCR.use_cassette('cat_api_breed_image_request') do
+      breed_id = 'beng'
 
-        # stub_request(:get, "https://api.thecatapi.com/v1/images/search?breed_ids=#{breed_id}") \
-        #   .to_return(body: File.read('spec/fixtures/the_cat_api/cat_breed_image.json'))
+      stub_request(:get, "https://api.thecatapi.com/v1/images/search?breed_ids=#{breed_id}") \
+        .to_return(body: File.read('spec/fixtures/the_cat_api/cat_breed_image.json'))
 
-        beng_cat_img = CatService.new.cat_breed_image('beng')
+      beng_cat_img = CatService.new.cat_breed_image('beng')
 
-        expect(beng_cat_img).to be_a(Array)
-        expect(beng_cat_img.count).to eq(1)
-        expect(beng_cat_img.first).to be_a(Hash)
-        expect(beng_cat_img.first).to have_key(:id)
-        expect(beng_cat_img.first[:id]).to be_a(String)
-        expect(beng_cat_img.first[:id].size).to eq(9)
-        expect(beng_cat_img.first).to have_key(:url)
-        expect(beng_cat_img.first[:url]).to be_a(String)
-        expect(beng_cat_img.first).to have_key(:width)
-        expect(beng_cat_img.first[:width]).to be_a(Integer)
-        expect(beng_cat_img.first).to have_key(:height)
-        expect(beng_cat_img.first[:height]).to be_a(Integer)
-      end
+      expect(beng_cat_img).to be_a(Array)
+      expect(beng_cat_img.count).to eq(1)
+      expect(beng_cat_img.first).to be_a(Hash)
+      expect(beng_cat_img.first).to have_key(:id)
+      expect(beng_cat_img.first[:id]).to be_a(String)
+      expect(beng_cat_img.first[:id].size).to eq(9)
+      expect(beng_cat_img.first).to have_key(:url)
+      expect(beng_cat_img.first[:url]).to be_a(String)
+      expect(beng_cat_img.first).to have_key(:width)
+      expect(beng_cat_img.first[:width]).to be_a(Integer)
+      expect(beng_cat_img.first).to have_key(:height)
+      expect(beng_cat_img.first[:height]).to be_a(Integer)
+      # end
     end
   end
 
