@@ -42,3 +42,6 @@
 
 # Ignore .gitignore itself because it's redundant.
 /.gitignore
+
+# Ignore vcr cassettes
+/spec/fixtures/vcr_cassettes
