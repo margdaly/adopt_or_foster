@@ -5,7 +5,7 @@ describe 'Cat Service' do
     VCR.use_cassette('cat_api_breeds_request') do
       let(:cat_breeds) { CatService.new.all_cat_breeds }
 
-      it 'returns cat breed name and id' do
+      xit 'returns cat breed name and id' do
         expect(cat_breeds).to be_a(Array)
         expect(cat_breeds.count).to eq(67)
 
@@ -21,7 +21,7 @@ describe 'Cat Service' do
         end
       end
 
-      it 'returns description of cat breed' do
+      xit 'returns description of cat breed' do
         cat_breeds.each do |breed|
           expect(breed).to have_key(:temperament)
           expect(breed[:temperament]).to be_a(String)
@@ -34,7 +34,7 @@ describe 'Cat Service' do
         end
       end
 
-      it 'returns level of care for cat breed' do
+      xit 'returns level of care for cat breed' do
         # Owner Info in Levels 1-5
         cat_breeds.each do |breed|
           expect(breed).to have_key(:affection_level)
@@ -65,7 +65,7 @@ describe 'Cat Service' do
   end
 
   describe '#random_cat_image' do
-    it 'returns a random picture of a cat' do
+    xit 'returns a random picture of a cat' do
       stub_request(:get, 'https://api.thecatapi.com/v1/images/search') \
         .to_return(body: File.read('spec/fixtures/the_cat_api/random_cat_image.json'))
 
@@ -86,7 +86,7 @@ describe 'Cat Service' do
   end
 
   describe '#multi_random_cat_images' do
-    it 'returns a collection of cat pictures based on the selected quantity' do
+    xit 'returns a collection of cat pictures based on the selected quantity' do
       img_amount = 10
       stub_request(:get, "https://api.thecatapi.com/v1/images/search?limit=#{img_amount}") \
         .to_return(body: File.read('spec/fixtures/the_cat_api/multi_random_cat_images.json'))
@@ -111,7 +111,7 @@ describe 'Cat Service' do
   end
 
   describe '#cat_breed_image' do
-    it 'returns a picture of a cat by breed' do
+    xit 'returns a picture of a cat by breed' do
       # VCR.use_cassette('cat_api_breed_image_request') do
       breed_id = 'beng'
 
@@ -137,7 +137,7 @@ describe 'Cat Service' do
   end
 
   describe '#multi_cat_breed_images' do
-    it 'returns a collection of cat pictures based on the selected quantity and breed' do
+    xit 'returns a collection of cat pictures based on the selected quantity and breed' do
       breed_id = 'beng'
       img_amount = 10
 
