@@ -25,7 +25,7 @@ describe 'Cat Facade' do
   end
 
   describe '#random_cat_image' do
-    it 'returns a url for a random cat image' do
+    it 'returns data for a random cat image' do
       stub_request(:get, 'https://api.thecatapi.com/v1/images/search') \
         .to_return(body: File.read('spec/fixtures/the_cat_api/random_cat_image.json'))
 
@@ -40,6 +40,27 @@ describe 'Cat Facade' do
       expect(rando_cat_img[:width]).to be_a(Integer)
       expect(rando_cat_img).to have_key(:height)
       expect(rando_cat_img[:height]).to be_a(Integer)
+    end
+  end
+
+  describe '#cat_breed_images' do
+    it 'returns data for a cat breed image' do
+      breed_id = 'beng'
+      stub_request(:get, "https://api.thecatapi.com/v1/images/search?breed_ids=#{breed_id}") \
+        .to_return(body: File.read('spec/fixtures/the_cat_api/cat_breed_image.json'))
+
+      beng_cat_img = cat_facade.cat_breed_image('beng')
+
+      expect(beng_cat_img).to be_a(Hash)
+      expect(beng_cat_img).to have_key(:id)
+      expect(beng_cat_img[:id]).to be_a(String)
+      expect(beng_cat_img[:id].size).to eq(9)
+      expect(beng_cat_img).to have_key(:url)
+      expect(beng_cat_img[:url]).to be_a(String)
+      expect(beng_cat_img).to have_key(:width)
+      expect(beng_cat_img[:width]).to be_a(Integer)
+      expect(beng_cat_img).to have_key(:height)
+      expect(beng_cat_img[:height]).to be_a(Integer)
     end
   end
 end
