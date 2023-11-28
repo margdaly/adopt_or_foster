@@ -31,17 +31,15 @@ describe 'Cat Facade' do
 
       rando_cat_img = cat_facade.random_cat_image
 
-      expect(rando_cat_img).to be_a(Array)
-      expect(rando_cat_img.count).to eq(1)
-      expect(rando_cat_img.first).to be_a(Hash)
-      expect(rando_cat_img.first).to have_key(:id)
-      expect(rando_cat_img.first[:id]).to be_a(String)
-      expect(rando_cat_img.first).to have_key(:url)
-      expect(rando_cat_img.first[:url]).to be_a(String)
-      expect(rando_cat_img.first).to have_key(:width)
-      expect(rando_cat_img.first[:width]).to be_a(Integer)
-      expect(rando_cat_img.first).to have_key(:height)
-      expect(rando_cat_img.first[:height]).to be_a(Integer)
+      expect(rando_cat_img).to be_a(Hash)
+      expect(rando_cat_img).to have_key(:id)
+      expect(rando_cat_img[:id]).to be_a(String)
+      expect(rando_cat_img).to have_key(:url)
+      expect(rando_cat_img[:url]).to be_a(String)
+      expect(rando_cat_img).to have_key(:width)
+      expect(rando_cat_img[:width]).to be_a(Integer)
+      expect(rando_cat_img).to have_key(:height)
+      expect(rando_cat_img[:height]).to be_a(Integer)
     end
   end
 end
