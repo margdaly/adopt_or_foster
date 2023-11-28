@@ -11,10 +11,8 @@ class CatFacade
     end
   end
 
-  def all_cat_breed_names
-    all_cat_breeds.map do |breed|
-      breed[:name]
-    end
+  def random_cat_image
+    cat_service.random_cat_image.first
   end
 
   private
