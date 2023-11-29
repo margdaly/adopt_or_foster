@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
   def index
-    @cat = CatService.new.random_cat_image
+    @cat = CatFacade.new
   end
 end
