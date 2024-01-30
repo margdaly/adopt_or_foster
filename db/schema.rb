@@ -16,7 +16,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_27_225210) do
 
   create_table "pets", force: :cascade do |t|
     t.boolean "adoptable", default: true
-    t.string "breed", limit: 4
+    t.string "breed"
     t.string "name"
     t.bigint "shelter_id", null: false
     t.datetime "created_at", null: false
